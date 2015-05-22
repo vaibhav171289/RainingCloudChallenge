@@ -2,11 +2,8 @@ package bouncingball;
 import java.awt.*;
 import java.util.Formatter;
 
-import collisiondetection.CollisionPhysics;
-import collisiondetection.CollisionResponse;
 
 public class Ball {
-	float mass;
    float x, y;           // Ball's center x and y 
    float speedX, speedY; // Ball's speed per step in x and y 
    float radius;         // Ball's radius
@@ -18,9 +15,8 @@ public class Ball {
     * moveAngle in usual Cartesian coordinates. Need to convert to speedX and
     * speedY in Java graphics coordinates for ease of operation.
     */
-   public Ball(float mass,float x, float y, float radius, float speed, float angleInDegree,
+   public Ball(float x, float y, float radius, float speed, float angleInDegree,
          Color color) {
-	   this.mass=mass;
       this.x = x;
       this.y = y;
       // Convert (speed, angle) to (x, y), with y-axis inverted
@@ -30,8 +26,8 @@ public class Ball {
       this.color = color;
    }
    /** Constructor with the default color */
-   public Ball(float mass,float x, float y, float radius, float speed, float angleInDegree) {
-      this(mass,x, y, radius, speed, angleInDegree, DEFAULT_COLOR);
+   public Ball(float x, float y, float radius, float speed, float angleInDegree) {
+      this(x, y, radius, speed, angleInDegree, DEFAULT_COLOR);
    }
    
    /** Draw itself using the given graphics context. */
@@ -85,7 +81,7 @@ public class Ball {
    
    /** Return mass */
    public float getMass() {
-      return mass / 100f;  // Normalize by a factor
+      return radius*radius*radius / 100f;  // Normalize by a factor
    }
    
    /** Return the kinetic energy (0.5mv^2) */

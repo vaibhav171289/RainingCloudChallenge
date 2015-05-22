@@ -1,9 +1,15 @@
 package bouncingball;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.ComponentAdapter;
 //import java.util.Random;
+import java.awt.event.ComponentEvent;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 /**
  * The control logic and main display panel for game.
@@ -22,8 +28,6 @@ private static final int UPDATE_RATE = 30;  // Frames per second (fps)
    private DrawCanvas canvas; // Custom canvas for drawing the box/ball
    private int canvasWidth;
    private int canvasHeight;
-   private static final float EPSILON_TIME = 1e-2f;  // Threshold for zero time
-
    
    
    
@@ -34,7 +38,7 @@ private static final int UPDATE_RATE = 30;  // Frames per second (fps)
     * @param width : screen width
     * @param height : screen height
     */
-   public BallWorld(int width, int height) {
+   public BallWorld(int width, int height,int speed,int angleInDegree,int radius) {
   
       canvasWidth = width;
       canvasHeight = height;
@@ -47,13 +51,11 @@ private static final int UPDATE_RATE = 30;  // Frames per second (fps)
       int speed = 5;
       int angleInDegree = rand.nextInt(360);
       */
-      int mass=0;
-      int radius=15;
+      
+      
       int x=50;
       int y=50;
-      int speed=5;
-      int angleInDegree=150;
-      ball = new Ball(mass,x, y, radius, speed, angleInDegree, Color.BLACK);
+      ball = new Ball(x, y, radius, speed, angleInDegree, Color.BLACK);
      
       // Init the Container Box to fill the screen
       box = new ContainerBox(0, 0, canvasWidth, canvasHeight, Color.WHITE, Color.YELLOW);

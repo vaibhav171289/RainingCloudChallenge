@@ -38,7 +38,7 @@ private static final int UPDATE_RATE = 30;  // Frames per second (fps)
     * @param width : screen width
     * @param height : screen height
     */
-   public BallWorld(int width, int height,int speed,int angleInDegree,int radius) {
+   public BallWorld(int width, int height,int throwingHeight,int speed,int angleInDegree,int radius) {
   
       canvasWidth = width;
       canvasHeight = height;
@@ -54,7 +54,7 @@ private static final int UPDATE_RATE = 30;  // Frames per second (fps)
       
       
       int x=50;
-      int y=50;
+      int y=throwingHeight;
       ball = new Ball(x, y, radius, speed, angleInDegree, Color.BLACK);
      
       // Init the Container Box to fill the screen
@@ -107,7 +107,7 @@ private static final int UPDATE_RATE = 30;  // Frames per second (fps)
     * Update the game objects, with proper collision detection and response.
     */
    public void gameUpdate() {
-	   ball.moveOneStepWithCollisionDetection(box);
+	   ball.moveOneStepWithCollisionDetection(box,UPDATE_RATE);
 	   }
 	
    

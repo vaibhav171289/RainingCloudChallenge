@@ -9,7 +9,8 @@ public class Ball {
    float radius;         // Ball's radius
    private Color color;  // Ball's color
    private static final Color DEFAULT_COLOR = Color.BLACK;
-
+   private double gravity=9.8;
+   private double angle;
    /**
     * Constructor: For user friendliness, user specifies velocity in speed and
     * moveAngle in usual Cartesian coordinates. Need to convert to speedX and
@@ -21,9 +22,10 @@ public class Ball {
       this.y = y;
       // Convert (speed, angle) to (x, y), with y-axis inverted
       this.speedX = (float)(speed * Math.cos(Math.toRadians(angleInDegree)));
-      this.speedY = (float)(-speed * (float)Math.sin(Math.toRadians(angleInDegree)));
+      this.speedY = (float)(-speed * (float)Math.sin(Math.toRadians(angleInDegree))-gravity*0.001);
       this.radius = radius;
       this.color = color;
+      this.angle=angleInDegree;
    }
    /** Constructor with the default color */
    public Ball(float x, float y, float radius, float speed, float angleInDegree) {
@@ -41,7 +43,7 @@ public class Ball {
     * 
     * @param box: the container (obstacle) for this ball. 
     */
-   public void moveOneStepWithCollisionDetection(ContainerBox box) {
+   public void moveOneStepWithCollisionDetection(ContainerBox box,int UPDATE_RATE) {
       // Get the ball's bounds, offset by the radius of the ball
       float ballMinX = box.minX + radius;
       float ballMinY = box.minY + radius;
@@ -53,20 +55,23 @@ public class Ball {
       y += speedY;
       // Check if the ball moves over the bounds. If so, adjust the position and speed.
       if (x < ballMinX) {
-         speedX = -speedX; // Reflect along normal
+         speedX = (float) (-speedX*Math.cos(Math.toRadians(angle))); // Reflect along normal
          x = ballMinX;     // Re-position the ball at the edge
       } else if (x > ballMaxX) {
-         speedX = -speedX;
+         speedX = (float) -(speedX*Math.cos(Math.toRadians(angle)));
          x = ballMaxX;
       }
       // May cross both x and y bounds
       if (y < ballMinY) {
-         speedY = -speedY;
-         y = ballMinY;
+         speedY = (float) -(speedY*(float)Math.sin(Math.toRadians(angle))-gravity*0.001);
+         y = (float) (ballMinY-(0.5*gravity*0.001*0.001));
       } else if (y > ballMaxY) {
-         speedY = -speedY;
-         y = ballMaxY;
+         speedY = (float) -(speedY*(float)Math.sin(Math.toRadians(angle))-gravity*0.001);;
+         y = (float) (ballMaxY-(0.5*gravity*0.001*0.001));
       }
+      //angle=getMoveAngle();
+      if(speedX<1 && speedY<1)
+    	  speedX=speedY=0;
    }
    
    /** Return the magnitude of speed. */

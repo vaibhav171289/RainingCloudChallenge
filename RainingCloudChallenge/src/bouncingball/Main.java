@@ -22,13 +22,15 @@ public class Main {
             
             System.out.println("Enter Frame Height");
             int frameHeight=scan.nextInt();
+            System.out.println("Enter Throwing Height");
+            int throwingHeight=scan.nextInt();
             System.out.println("Enter Throwing speed");
             int throwingSpeed=scan.nextInt();
             System.out.println("Enter Throwing angle in degree");
             int throwingAngle=scan.nextInt();
             System.out.println("Enter Radius of ball in units");
             int radius=scan.nextInt();
-            frame.setContentPane(new BallWorld(frameWidth, frameHeight,throwingSpeed,throwingAngle,radius)); // BallWorld is a JPanel
+            frame.setContentPane(new BallWorld(frameWidth, frameHeight,throwingHeight,throwingSpeed,throwingAngle,radius)); // BallWorld is a JPanel
             frame.pack();            // Preferred size of BallWorld
             frame.setVisible(true);  // Show it
          }

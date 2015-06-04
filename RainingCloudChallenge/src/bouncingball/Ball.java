@@ -69,8 +69,8 @@ public class Ball {
          speedY = (float) -(speedY*(float)Math.sin(Math.toRadians(angle))-gravity*0.001);;
          y = (float) (ballMaxY-(0.5*gravity*0.001*0.001));
       }
-      //angle=getMoveAngle();
-      if(speedX<1 && speedY<1)
+//      angle=getMoveAngle();
+      if(getSpeed()<1)
     	  speedX=speedY=0;
    }
    
